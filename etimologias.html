@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Ejercicios de Etimologías Médicas</title>
+<style>
+  body{font-family:sans-serif; margin:20px; background:#f8f9fb; color:#111;}
+  h1{color:#004080;}
+  .panel{background:white; padding:15px; border-radius:8px; box-shadow:0 3px 10px rgba(0,0,0,0.08); margin-bottom:20px;}
+  label{font-weight:bold;}
+  select, button{padding:8px; border:1px solid #ccc; border-radius:5px; margin:5px;}
+  button{background:#0066cc; color:white; cursor:pointer;}
+  button:hover{background:#0055aa;}
+  .result{margin-top:15px; padding:10px; background:#eef6ff; border-radius:5px;}
+  .meaning{margin-top:10px; font-style:italic;}
+</style>
+</head>
+<body>
+<h1>Ejercicio Interactivo de Etimologías</h1>
+
+<div class="panel">
+  <label for="prefijoSel">Prefijo:</label>
+  <select id="prefijoSel"></select>
+
+  <label for="raizSel">Raíz (Aparato respiratorio):</label>
+  <select id="raizSel"></select>
+
+  <label for="categoriaSuf">Categoría de Sufijo:</label>
+  <select id="categoriaSuf"></select>
+
+  <label for="sufijoSel">Sufijo:</label>
+  <select id="sufijoSel"></select>
+
+  <button id="formarBtn">Formar palabra</button>
+</div>
+
+<div class="panel result" id="resultado" style="display:none;">
+  <h2>Palabra formada:</h2>
+  <div id="palabra" style="font-size:1.4em; font-weight:bold;"></div>
+  <div class="meaning" id="significado"></div>
+</div>
+
+<script>
+// Variables globales para datos
+let prefijos = [];
+let sufijos = [];
+let raices = [];
+
+// Elementos HTML
+const prefijoSel = document.getElementById('prefijoSel');
+const raizSel = document.getElementById('raizSel');
+const categoriaSuf = document.getElementById('categoriaSuf');
+const sufijoSel = document.getElementById('sufijoSel');
+const formarBtn = document.getElementById('formarBtn');
+const resultadoDiv = document.getElementById('resultado');
+const palabraDiv = document.getElementById('palabra');
+const significadoDiv = document.getElementById('significado');
+
+// Cargar JSON
+Promise.all([
+  fetch('prefijos.json').then(res=>res.json()),
+  fetch('sufijos.json').then(res=>res.json()),
+  fetch('raices.json').then(res=>res.json())
+])
+.then(([prefData, sufData, raizData]) => {
+  prefijos = prefData;
+  sufijos = sufData;
+  raices = raizData;
+
+  cargarPrefijos();
+  cargarRaices();
+  cargarCategorias();
+});
+
+// Cargar prefijos
+function cargarPrefijos(){
+  prefijoSel.innerHTML = '';
+  prefijos.forEach(p=>{
+    const opt = document.createElement('option');
+    opt.value = p.prefijo;
+    opt.textContent = `${p.prefijo} — ${p.significado}`;
+    prefijoSel.appendChild(opt);
+  });
+}
+
+// Cargar raíces
+function cargarRaices(){
+  raizSel.innerHTML = '';
+  raices.forEach(r=>{
+    const opt = document.createElement('option');
+    opt.value = r.raiz;
+    opt.textContent = `${r.raiz} — ${r.significado}`;
+    raizSel.appendChild(opt);
+  });
+}
+
+// Cargar categorías de sufijos
+function cargarCategorias(){
+  categoriaSuf.innerHTML = '';
+  sufijos.forEach(cat=>{
+    const opt = document.createElement('option');
+    opt.value = cat.categoria;
+    opt.textContent = cat.categoria.charAt(0).toUpperCase() + cat.categoria.slice(1);
+    categoriaSuf.appendChild(opt);
+  });
+  categoriaSuf.addEventListener('change', cargarSufijos);
+  cargarSufijos(); // primera carga
+}
+
+// Cargar sufijos según categoría
+function cargarSufijos(){
+  sufijoSel.innerHTML = '';
+  const categoria = categoriaSuf.value;
+  const catObj = sufijos.find(c=>c.categoria === categoria);
+  if(catObj){
+    catObj.items.forEach(s=>{
+      const opt = document.createElement('option');
+      opt.value = s.sufijo;
+      opt.textContent = `${s.sufijo} — ${s.significado}`;
+      sufijoSel.appendChild(opt);
+    });
+  }
+}
+
+// Evento para formar palabra
+formarBtn.addEventListener('click', ()=>{
+  const pref = prefijoSel.value.replace(/[, ]/g,'');
+  const raiz = raizSel.value.replace(/[, ]/g,'');
+  const suf = sufijoSel.value.replace(/[, ]/g,'');
+  const palabra = pref + raiz + suf;
+
+  const sigPref = prefijos.find(p=>p.prefijo===prefijoSel.value)?.significado || '';
+  const sigRaiz = raices.find(r=>r.raiz===raizSel.value)?.significado || '';
+  const sigSuf = (() => {
+    for(let cat of sufijos){
+      const item = cat.items.find(s=>s.sufijo===sufijoSel.value);
+      if(item) return item.significado;
+    }
+    return '';
+  })();
+
+  palabraDiv.textContent = palabra.toLowerCase();
+  significadoDiv.textContent = `(${sigPref}) + (${sigRaiz}) + (${sigSuf})`;
+  resultadoDiv.style.display = 'block';
+});
+</script>
+</body>
+</html>

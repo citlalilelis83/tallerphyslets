@@ -1,0 +1,53 @@
+[
+  {
+    "categoria": "diagnostico",
+    "items": [
+      { "sufijo": "cele", "significado": "hernia, tumor" },
+      { "sufijo": "ectasia", "significado": "extirpación" },
+      { "sufijo": "emia", "significado": "sangre" },
+      { "sufijo": "grafe, es", "significado": "descripción" },
+      { "sufijo": "osis", "significado": "condición" },
+      { "sufijo": "itis", "significado": "inflamación" },
+      { "sufijo": "logia", "significado": "tratado" },
+      { "sufijo": "malacia", "significado": "reblandecimiento" },
+      { "sufijo": "megalía", "significado": "crecimiento" },
+      { "sufijo": "metría", "significado": "medida" },
+      { "sufijo": "oma", "significado": "tumor" },
+      { "sufijo": "patos", "significado": "enfermedad" },
+      { "sufijo": "podo", "significado": "pie" },
+      { "sufijo": "ptosis", "significado": "caída" },
+      { "sufijo": "rragia", "significado": "escurrimiento" },
+      { "sufijo": "rrea", "significado": "flujo" },
+      { "sufijo": "rrexis", "significado": "ruptura" },
+      { "sufijo": "tomía", "significado": "corte" }
+    ]
+  },
+  {
+    "categoria": "intervencion",
+    "items": [
+      { "sufijo": "centesis", "significado": "punción" },
+      { "sufijo": "desis", "significado": "fijación" },
+      { "sufijo": "ectomía", "significado": "extirpación" },
+      { "sufijo": "litos", "significado": "piedra o cálculos" },
+      { "sufijo": "oscopía", "significado": "inspección" },
+      { "sufijo": "ostomía", "significado": "apertura" },
+      { "sufijo": "otomía", "significado": "incisión" },
+      { "sufijo": "pexia", "significado": "suspensión" },
+      { "sufijo": "plastia", "significado": "corrección" },
+      { "sufijo": "rrafia", "significado": "sutura" },
+      { "sufijo": "tripsia", "significado": "aplastamiento" }
+    ]
+  },
+  {
+    "categoria": "sintoma",
+    "items": [
+      { "sufijo": "algia", "significado": "dolor" },
+      { "sufijo": "espasmo", "significado": "contracción" },
+      { "sufijo": "genia", "significado": "origen" },
+      { "sufijo": "lisis", "significado": "destrucción" },
+      { "sufijo": "oide", "significado": "semejante" },
+      { "sufijo": "osis", "significado": "condición" },
+      { "sufijo": "penia", "significado": "deficiencia" }
+    ]
+  }
+]

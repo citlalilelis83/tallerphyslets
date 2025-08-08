@@ -1,0 +1,16 @@
+[
+  { "raiz": "rin, rinos", "significado": "nariz" },
+  { "raiz": "naso", "significado": "nariz" },
+  { "raiz": "osmo", "significado": "olfato" },
+  { "raiz": "antro", "significado": "cavidad" },
+  { "raiz": "sinus", "significado": "seno paranasal" },
+  { "raiz": "faringo", "significado": "faringe" },
+  { "raiz": "laringo", "significado": "laringe" },
+  { "raiz": "fono", "significado": "voz" },
+  { "raiz": "traqueo", "significado": "tráquea" },
+  { "raiz": "bronqui", "significado": "bronquio" },
+  { "raiz": "neumo", "significado": "pulmón" },
+  { "raiz": "pulmo", "significado": "pulmón" },
+  { "raiz": "alveol", "significado": "alvéolo" },
+  { "raiz": "pleuro", "significado": "pleura" }
+]
